@@ -1,0 +1,4 @@
+;;; -*- Mode: Lisp; Syntax: Common-Lisp; Package: USER -*-
+
+(fs:set-logical-pathname-host "HOME" :translations
+  '(("**;" "VENUS:>rel-8-3>home>**>")))
