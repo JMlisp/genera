@@ -16,9 +16,9 @@ Table of Contents
 
 Overview:
 
-This section details the steps required to run Genera 8.3 on Ivory based Symbolics machines, the way to control the cold load stream, and how to access Genera from a host on the same Intranet. In addition, it outlines details of Genera 8.3 utilities and explains how to create a customised Complete World on a higher capacity Vendor-provided SCSI disk.
+This section details the steps required to run Genera 8.3 on Ivory Symbolics machines, the way to control the cold load stream, and how to access Genera from a host on the same Intranet. In addition, it outlines details of Genera 8.3 utilities and explains how to create a customised Complete World on a higher capacity Vendor-provided SCSI disk.
 
-The description applies to Ivory based machines (iMACH), i.e NXP1000 and XL machines. Unlike XL machines which have their own console, i.e monitor, mouse and keyboard, the NXP1000 needs both a VT100 compatible Serial Terminal to control the cold load stream and an X Terminal to interact with Genera. Configuration details required to achieve this goal are given below.
+The description applies to Ivory machines (iMACH), i.e NXP1000 and XL machines. Unlike XL machines which have their own console, i.e monitor, mouse and keyboard, the NXP1000 needs both a VT100 compatible Serial Terminal to control the cold load stream and an X Terminal to interact with Genera. Configuration details required to achieve this goal are given below.
 
 
 Configure serial COM port parameters to control the FEP:
@@ -27,7 +27,7 @@ Configure serial COM port parameters to control the FEP:
 The serial COM port parameters required to connect to and control the Front-End Processor (FEP) of a Symbolics NXP1000 are as follows:
 
 | Parameter | Value |
-| --- | --- |
+|:--- |:--- |
 | Connection speed: | 9600 Bits per second |
 | Number of Data Bits: | 8 |
 | Parity Bits: | none |
@@ -43,7 +43,7 @@ Once the COM port has been configured, you can use a serial port communication s
 
 As you can see, only two commands are required to boot Genera on a Symbolics machine. This are the commands hello and boot. Hello loads the FEP overlays, assigns an IP Internet address to the machine's Network Interface and includes declarations that enable boot to load a World and start Genera.
 
-For use on Ivory based machines, this repository includes examples of the FEP command files [hello.boot](https://github.com/JMlisp/genera/blob/main/hello.boot) and [boot.boot](https://github.com/JMlisp/genera/blob/main/boot.boot). Also available is the FEP command file [autoboot.boot](https://github.com/JMlisp/genera/blob/main/autoboot.boot), which you can use to automate Genera's boot process. You can create .boot files in Genera using Zmacs.
+For use on Ivory machines, this repository includes examples of the FEP command files [hello.boot](https://github.com/JMlisp/genera/blob/main/hello.boot) and [boot.boot](https://github.com/JMlisp/genera/blob/main/boot.boot). Also available is the FEP command file [autoboot.boot](https://github.com/JMlisp/genera/blob/main/autoboot.boot), which you can use to automate Genera's boot process. You can create .boot files in Genera using Zmacs.
 
 
 Access Genera on the NXP1000 from an Intranet host via xterm:
@@ -67,7 +67,11 @@ On your display it will appear an X screen similar to that shown by the screensh
 
 As shows [Venus Peek Network on Server via the Intranet](https://github.com/JMlisp/genera/blob/main/screenshots/Venus%20Peek%20Network%20on%20Server%20via%20the%20Intranet.png), the X Server's display 0 is bound as foreign port 6000 (the default display port), and Telnet port 23, in this X session, is bound as foreign port 49183.
 
-Also note, that the Telnet process on the X Server host doesn't return, waiting for input, until either the Remote Terminal or the X session are halted, as show [Venus Peek Processes on Server via the Intranet](https://github.com/JMlisp/genera/blob/main/screenshots/Venus%20Peek%20Processes%20on%20Server%20via%20the%20Intranet.png), [Telnet - X Session Halt - Venus to Server via the Intranet](https://github.com/JMlisp/genera/blob/main/screenshots/Telnet%20-%20X%20Session%20Halt%20-%20Venus%20to%20Server%20via%20the%20Intranet.png) and [Logout - Machine Halt - Venus on Server via the Intranet](https://github.com/JMlisp/genera/blob/main/screenshots/Logout%20-%20Machine%20Halt%20-%20Venus%20on%20Server%20via%20the%20Intranet.png), respectively.
+Also note that the Telnet process on the X Server host does not return and waits for input as shown in [Venus Peek Processes on Server via the Intranet](https://github.com/JMlisp/genera/blob/main/screenshots/Venus%20Peek%20Processes%20on%20Server%20via%20the%20Intranet.png) until the command "**halt remote terminal**" is executed in the bash shell as shown in [Telnet - X Session Halt - Venus to Server via the Intranet](https://github.com/JMlisp/genera/blob/main/screenshots/Telnet%20-%20X%20Session%20Halt%20-%20Venus%20to%20Server%20via%20the%20Intranet.png) and Genera is halted as follows:
+
+command:  **Logout**
+
+command:  **Halt Machine (keywords) :Query (Yes or No [default Yes]) no**
 
 For who might be interested, also available in the repository is a set of Genera configuration files that may be useful when setting up a new Site.
 
@@ -203,7 +207,7 @@ Build a Complete World on a Vendor-provided SCSI Disk:
 
 You can use a higher-capacity Vendor-provided SCSI disk to replace the small 1GB disk usually installed on Symbolics NXP1000 and XL machines on delivery.
 
-Be however aware, that because a word on Ivory based Symbolics machines uses 40 bits, i.e for each 32-bit word there are 8 additional tag bits, only specific SCSI disks with a variable sector size can be low-level formatted for use on NXP1000 and XL machines, as for example the 9.1GB Seagate ST39173N SCSI disk. The default sector size for formatting such a SCSI disk is 1280 Bytes per sector. That is, each sector on a SCSI disk for Ivory based machines comprises 256 40-bit words.
+Be however aware, that because a word on Ivory Symbolics machines uses 40 bits, i.e for each 32-bit word there are 8 additional tag bits, only specific SCSI disks with a variable sector size can be low-level formatted for use on NXP1000 and XL machines, as for example the 9.1GB Seagate ST39173N SCSI disk. The default sector size for formatting such a SCSI disk is 1280 Bytes per sector. That is, each sector on a SCSI disk for Ivory machines comprises 256 40-bit words.
 
 To proceed with the installation of a virgin SCSI disk onto an iMACH workstation these are the steps you might take. However, take into account that the convention for mapping SCSI addresses to FEP unit numbers is that the FEP unit number, but only for Symbolics XL machines, is 7 greater than the SCSI address, with the first SCSI disk of a machine having the SCSI address 0.
 
