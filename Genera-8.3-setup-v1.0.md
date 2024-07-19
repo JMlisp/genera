@@ -5,13 +5,13 @@ Genera 8.3 Installation Procedure for Symbolics Ivory Machines:
 
 Table of Contents
 
-- Configure serial COM port parameters to control the FEP
-- Prepare FEP files required to boot Symbolics Genera
-- Access Genera on the NXP1000 from an Intranet host via xterm
-- Enable PC and Mac to mount and export a CD-ROM filesystem via NFS
-- Restore Distribution Worlds from CD-ROM via the FEP-Tape Activity
-- Build an IDS World based on a Genera Distribution World
-- Build a Complete World on a Vendor-provided SCSI Disk
+- [Configure serial COM port parameters to control the FEP](#configure-serial-com-port-parameters-to-control-the-fep:)
+- [Prepare FEP files required to boot Symbolics Genera](#prepare-fep-files-required-to-boot-symbolics-genera:)
+- [Access Genera on the NXP1000 from an Intranet host via xterm](#access-genera-on-the-nxp1000-from-an-intranet-host-via-xterm:)
+- [Enable PC and Mac to mount and export a CD-ROM filesystem via NFS](#enable-pc-and-mac-to-mount-and-export-a-cd-rom-filesystem-via-nfs:)
+- [Restore Distribution Worlds from CD-ROM via the FEP-Tape Activity](#restore-distribution-worlds-from-cd-rom-via-the-fep-tape-activity:)
+- [Build an IDS World based on a Genera Distribution World](#build-an-ids-world-based-on-a-genera-distribution-world:)
+- [Build a Complete World on a Vendor-provided SCSI Disk](#build-a-complete-world-on-a-vendor-provided-scsi-disk:)
 
 
 Overview:
