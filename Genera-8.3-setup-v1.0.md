@@ -1,17 +1,16 @@
 
-Genera 8.3 Installation Procedure for Symbolics Ivory Machines:
-===============================================================
+# Genera 8.3 Installation Procedure for Symbolics Ivory Machines
 
 
 Table of Contents
 
-- [Configure serial COM port parameters to control the FEP](#configure-serial-com-port-parameters-to-control-the-fep:)
-- [Prepare FEP files required to boot Symbolics Genera](#prepare-fep-files-required-to-boot-symbolics-genera:)
-- [Access Genera on the NXP1000 from an Intranet host via xterm](#access-genera-on-the-nxp1000-from-an-intranet-host-via-xterm:)
-- [Enable PC and Mac to mount and export a CD-ROM filesystem via NFS](#enable-pc-and-mac-to-mount-and-export-a-cd-rom-filesystem-via-nfs:)
-- [Restore Distribution Worlds from CD-ROM via the FEP-Tape Activity](#restore-distribution-worlds-from-cd-rom-via-the-fep-tape-activity:)
-- [Build an IDS World based on a Genera Distribution World](#build-an-ids-world-based-on-a-genera-distribution-world:)
-- [Build a Complete World on a Vendor-provided SCSI Disk](#build-a-complete-world-on-a-vendor-provided-scsi-disk:)
+- [Configure serial COM port parameters to control the FEP](#configure-serial-com-port-parameters-to-control-the-fep)
+- [Prepare FEP files required to boot Symbolics Genera](#prepare-fep-files-required-to-boot-symbolics-genera)
+- [Access Genera on the NXP1000 from an Intranet host via xterm](#access-genera-on-the-nxp1000-from-an-intranet-host-via-xterm)
+- [Enable PC and Mac to mount and export a CD-ROM filesystem via NFS](#enable-pc-and-mac-to-mount-and-export-a-cd-rom-filesystem-via-nfs)
+- [Restore Distribution Worlds from CD-ROM via the FEP-Tape Activity](#restore-distribution-worlds-from-cd-rom-via-the-fep-tape-activity)
+- [Build an IDS World based on a Genera Distribution World](#build-an-ids-world-based-on-a-genera-distribution-world)
+- [Build a Complete World on a Vendor-provided SCSI Disk](#build-a-complete-world-on-a-vendor-provided-scsi-disk)
 
 
 Overview:
@@ -21,8 +20,7 @@ This section details the steps required to run Genera 8.3 on Ivory Symbolics mac
 The description applies to Ivory machines (iMACH), i.e NXP1000 and XL machines. Unlike XL machines which have their own console, i.e monitor, mouse and keyboard, the NXP1000 needs both a VT100 compatible Serial Terminal to control the cold load stream and an X Terminal to interact with Genera. Configuration details required to achieve this goal are given below.
 
 
-Configure serial COM port parameters to control the FEP:
---------------------------------------------------------
+## Configure serial COM port parameters to control the FEP
 
 The serial COM port parameters required to connect to and control the Front-End Processor (FEP) of a Symbolics NXP1000 are as follows:
 
@@ -36,8 +34,7 @@ The serial COM port parameters required to connect to and control the Front-End 
 Flow control can be left with the hardware of your serial COM port. If your computer does not have a serial COM port, you can use a USB to RS232 port adapter. e.g a [VScom USB-2COM PL](https://www.vscom.de/vscom-usb-2com-pl.html), a small and reliable VScom adapter, which provides two RS232 serial ports, easy to configure and to use. The [HyperTerminal Configuration](https://github.com/JMlisp/genera/blob/main/screenshots/HyperTerminal%20Configuration.png) screenshot shows the configuration of a COM port in HyperTerminal under Windows using the aforementioned adapter. Drivers and documentation for this adapter are available for Windows and for other Operating Systems from the aforementioned product homepage.
 
 
-Prepare FEP files required to boot Symbolics Genera:
-----------------------------------------------------
+## Prepare FEP files required to boot Symbolics Genera
 
 Once the COM port has been configured, you can use a serial port communication software, e.g [HyperTerminal](https://hyperterminal-private-edition-htpe.en.softonic.com/?ex=RAMP-2046.2) or [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html), to connect to the FEP and control the cold load stream on NXP1000 machines and the process of booting Genera, as shows the  [HyperTerminal - Cold Load Stream Venus](https://github.com/JMlisp/genera/blob/main/screenshots/HyperTerminal%20-%20Cold%20Load%20Stream%20Venus.png) screenshot.
 
@@ -46,8 +43,7 @@ As you can see, only two commands are required to boot Genera on a Symbolics mac
 For use on Ivory machines, this repository includes examples of the FEP command files [hello.boot](https://github.com/JMlisp/genera/blob/main/hello.boot) and [boot.boot](https://github.com/JMlisp/genera/blob/main/boot.boot). Also available is the FEP command file [autoboot.boot](https://github.com/JMlisp/genera/blob/main/autoboot.boot), which you can use to automate Genera's boot process. You can create .boot files in Genera using Zmacs.
 
 
-Access Genera on the NXP1000 from an Intranet host via xterm:
--------------------------------------------------------------
+## Access Genera on the NXP1000 from an Intranet host via xterm
 
 On the NXP1000, you can access Genera from a host on the same Intranet using an X Terminal Emulator. Under Windows, this can be [X-Win32](https://www.starnet.com/xwin32/) or [Exceed](https://www.opentext.com/en-gb/products/exceed?utm_source=connectivity&utm_medium=redirect), as well as [X2Go](https://wiki.x2go.org/doku.php/start). Under Mac OS X, you can use the X Terminal Emulator (xterm). Xterm allows Genera PCF fonts to be used during an X session and use Telnet to start an X screen on your X server's display, as shows for the host SERVER [Telnet - X Session Start - Venus to Server via the Intranet](https://github.com/JMlisp/genera/blob/main/screenshots/Telnet%20-%20X%20Session%20Start%20-%20Venus%20to%20Server%20via%20the%20Intranet.png), using the commands,
 
@@ -114,8 +110,7 @@ Also available are the sources of the Private-Patch-Files provided below, and th
 Except for sys.translations, fspt.fspt and home-objects.text, but including hello.boot, boot.boot and autoboot.boot, put the aforementioned files on a CD-ROM, eventually removing the extension .txt from .lisp files if attached, and title it Downloads. It will be useful, should you decide to build a new world, incremental or complete, as described further below.
 
 
-Enable PC and Mac to mount and export a CD-ROM filesystem via NFS:
-------------------------------------------------------------------
+## Enable PC and Mac to mount and export a CD-ROM filesystem via NFS
 
 A CD-ROM drive for NXP1000 and XL machines normally has had to be ordered separately. Should a CD-ROM drive not be available to your machine, you can restore a Symbolics Distribution World into Genera, using the CD-ROM drive of another workstation on the LAN, for example of a PC or Mac.
 
@@ -136,8 +131,7 @@ command:  **show  NFS  exports  (the name of a host [default ...])  hostname**
 You can then proceed, mounting the CD-ROM filesystem, e.g using Genera's FileSystem Manager, as shown for the PC host Pluto and for the workstation MacPro in the screenshots [Exported Genera_8_3 CD-ROM Filesystem from PC Pluto](https://github.com/JMlisp/genera/blob/main/screenshots/Exported%20Genera_8_3%20CD-ROM%20Filesystem%20from%20PC%20Pluto.png) and [Exported Genera_8_3 CD-ROM Filesystem from MacPro](https://github.com/JMlisp/genera/blob/main/screenshots/Exported%20Genera_8_3%20CD-ROM%20Filesystem%20from%20MacPro.png), respectively.
 
 
-Restore Distribution Worlds from CD-ROM via the FEP-Tape Activity:
-------------------------------------------------------------------
+## Restore Distribution Worlds from CD-ROM via the FEP-Tape Activity
 
 From Genera 8.1.1 onwards, you can restore Distribution worlds from CD-ROM using the FEP-Tape activity. As shown in screenshots [Restore Genera Distribution World from PC CD-ROM](https://github.com/JMlisp/genera/blob/main/screenshots/Restore%20Genera%20Distribution%20World%20from%20PC%20CD-ROM.png) and [Restore Genera Distribution World from Mac CD-ROM](https://github.com/JMlisp/genera/blob/main/screenshots/Restore%20Genera%20Distribution%20World%20from%20Mac%20CD-ROM.png), do this, typing Read Image File and supplying a CD-ROM pathname to a world image. Do not use the [Read Image File] menu item, because it will not prompt you for a world image pathname. If necessary, use "Ctrl-Shift ?", which provides the possible path completions to identify and restore the world you are interested on.
 
@@ -146,8 +140,7 @@ The same way, you can copy also other software from a CD-ROM onto an Ivory's LMF
 command:  **copy file (pathname of files [default ...]) MP:/Volumes/Downloads/y2k.lisp (to [default ...]) v:>special>**
 
 
-Build an IDS World based on a Genera Distribution World:
---------------------------------------------------------
+## Build an IDS World based on a Genera Distribution World
 
 On a Symbolics machine, e.g on the iMACH VENUS, you can build an Incremental Disk Save (IDS) world, including a Distribution World, restored from CD-ROM as described above, e.g Genera_8_3, and the y2k Private-Patch-File, performing the sequence of steps given below.
 
@@ -202,8 +195,7 @@ You can also use the Genera activity "Restore Distribution" to load special prog
 With the NFS settings for exporting CD-ROM filesystems described above, you can even place a Genera_8_3 Distribution CD-ROM into a PC's CD/DVD drive, then use an X Terminal Emulator on a Mac to mount the CD-ROM's filesystem under Genera's File System Maintenance Program, as shows the screenshot [Exported Genera_8_3 CD-ROM Filesystem from PC via Mac](https://github.com/JMlisp/genera/blob/main/screenshots/Exported%20Genera_8_3%20CD-ROM%20Filesystem%20from%20PC%20via%20Mac.png), and restore a Distribution world and Genera sources, as shown in [Restore Genera Distribution World from PC CD-ROM via Mac](https://github.com/JMlisp/genera/blob/main/screenshots/Restore%20Genera%20Distribution%20World%20from%20PC%20CD-ROM%20via%20Mac.png) and [Restore Genera Distribution Sources from PC CD-ROM via Mac](https://github.com/JMlisp/genera/blob/main/screenshots/Restore%20Genera%20Distribution%20Sources%20from%20PC%20CD-ROM%20via%20Mac.png), respectively.
 
 
-Build a Complete World on a Vendor-provided SCSI Disk:
-------------------------------------------------------
+## Build a Complete World on a Vendor-provided SCSI Disk
 
 You can use a higher-capacity Vendor-provided SCSI disk to replace the small 1GB disk usually installed on Symbolics NXP1000 and XL machines on delivery.
 
